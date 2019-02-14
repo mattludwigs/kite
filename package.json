@@ -1,0 +1,46 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "description": "My Project",
+  "esy": {
+    "build": "pesy",
+    "release": {
+      "releasedBinaries": [
+        "ServerApp.exe"
+      ]
+    }
+  },
+  "buildDirs": {
+    "test": {
+      "require": ["server.lib"],
+      "main": "TestServer",
+      "name": "TestServer.exe"
+    },
+    "library": {
+      "name": "server.lib",
+      "namespace": "Server"
+    },
+    "executable": {
+      "require": ["server.lib, cohttp, cohttp-lwt, cohttp-lwt-unix"],
+      "main": "ServerApp",
+      "name": "ServerApp.exe"
+    }
+  },
+  "scripts": {
+    "pesy": "bash -c 'env PESY_MODE=update pesy'",
+    "test": "esy x TestServer.exe"
+  },
+  "dependencies": {
+    "@opam/dune": ">=1.6.0",
+    "@opam/cohttp": "^2.0.0",
+    "@opam/cohttp-lwt": "^2.0.0",
+    "@opam/cohttp-lwt-unix": "^2.0.0",
+    "@esy-ocaml/reason": "*",
+    "refmterr": "*",
+    "ocaml": "^4.4.0",
+    "pesy": "*"
+  },
+  "devDependencies": {
+    "@opam/merlin": "*"
+  }
+}
