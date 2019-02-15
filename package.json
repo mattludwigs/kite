@@ -20,11 +20,16 @@
     },
     "library": {
       "name": "server.lib",
-      "namespace": "Server"
+      "namespace": "Server",
+      "require": [
+        "lwt",
+        "cohttp",
+        "cohttp-lwt-unix"
+      ]
     },
     "executable": {
       "require": [
-        "server.lib, cohttp, cohttp-lwt, cohttp-lwt-unix"
+        "server.lib"
       ],
       "main": "ServerApp",
       "name": "ServerApp.exe"
@@ -36,7 +41,9 @@
   },
   "dependencies": {
     "@opam/dune": ">=1.6.0",
-    "@opam/opium": "^0.17.0",
+    "@opam/cohttp": "2.0.0",
+    "@opam/cohttp-lwt-unix": "2.0.0",
+    "@opam/lwt": "4.1.0",
     "@esy-ocaml/reason": "*",
     "refmterr": "*",
     "ocaml": "^4.4.0",

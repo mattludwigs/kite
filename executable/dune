@@ -7,5 +7,5 @@
    (name ServerApp)  ;  From package.json main field
    ; The name of the executable (runnable via esy x ServerApp.exe) 
    (public_name ServerApp.exe)  ;  From package.json name field
-   (libraries  server.lib cohttp cohttp-lwt cohttp-lwt-unix ) ;  From package.json require field (array of strings)
+   (libraries  server.lib ) ;  From package.json require field (array of strings)
 )

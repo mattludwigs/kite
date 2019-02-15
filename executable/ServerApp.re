@@ -1,5 +1,1 @@
-open Opium.Std;
-
-let basic = get("/", req => {});
-
-let _ = App.empty;
+let _ = Server.empty() |> Server.listen;
