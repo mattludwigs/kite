@@ -1,17 +1,19 @@
-open Cohttp;
 open Lwt;
 
-module Html = Html;
-module Server = Cohttp_lwt_unix.Server;
+module Std = Std;
+module CoServer = Cohttp_lwt_unix.Server;
 
 type port = int;
 
-type t = {port};
+type t = {
+  port,
+  router: Router.t,
+};
 
 type handler = Request.t => Response.t;
 
 let empty = () => {
-  {port: 3000};
+  {port: 3000, router: Router.empty()};
 };
 
 let getPort = server => server.port;
@@ -20,26 +22,27 @@ let setPort = (server, port) => {
   port;
 };
 
-let tcpMode = port => `TCP(`Port(port));
+let get = (path, handler, server) => {
+  let route = Route.make(`GET, path, handler);
 
-let statusOk = `OK;
-
-let respond = (body, status) => {
-  Server.respond(~status=statusOk, ~body=`Empty, ());
+  {...server, router: Router.putRoute(route, server.router)};
 };
 
-let root = (_conn, req, body) => {
-  respond(`Empty, statusOk);
+let tcpMode = port => `TCP(`Port(port));
+
+let listenWith = (handler, server) => {
+  let mode = tcpMode(getPort(server));
+
+  let callback = (_, req, _) => {
+    let req = Request.from_raw(req);
+    let promise = handler(req);
+    Response.send(promise);
+  };
+
+  ignore @@
+  Lwt_main.run(CoServer.create(~mode, CoServer.make(~callback, ())));
 };
 
 let listen = server => {
-  let mode = tcpMode(getPort(server));
-  ignore @@
-  Lwt_main.run(Server.create(~mode, Server.make(~callback=root, ())));
-};
-
-let listWith = (server, callback) => {
-  let mode = tcpMode(getPort(server));
-
-  ignore @@ Lwt_main.run(Server.create(~mode, Server.make(~callback, ())));
+  ignore @@ listenWith(Handle.empty, server);
 };

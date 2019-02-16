@@ -45,6 +45,7 @@
     "@opam/cohttp-lwt-unix": "2.0.0",
     "@opam/lwt": "4.1.0",
     "@esy-ocaml/reason": "*",
+    "@reason-native/console": "^0.0.3",
     "refmterr": "*",
     "ocaml": "^4.4.0",
     "pesy": "*"
