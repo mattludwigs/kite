@@ -30,19 +30,20 @@ let get = (path, handler, server) => {
 
 let tcpMode = port => `TCP(`Port(port));
 
-let listenWith = (handler, server) => {
-  let mode = tcpMode(getPort(server));
+let getHandleForRequest = (req, server) => {
+  let path = Request.path(req);
 
-  let callback = (_, req, _) => {
-    let req = Request.from_raw(req);
-    let promise = handler(req);
-    Response.send(promise);
-  };
-
-  ignore @@
-  Lwt_main.run(CoServer.create(~mode, CoServer.make(~callback, ())));
+  Router.getHandleForPath(path, server.router);
 };
 
 let listen = server => {
-  ignore @@ listenWith(Handle.empty, server);
+  let mode = tcpMode(getPort(server));
+  Console.log(server.port);
+  let callback = (_, req, _) => {
+    let req = Request.from_raw(req);
+    let res = getHandleForRequest(req, server) @@ req;
+    Response.send(res);
+  };
+  ignore @@
+  Lwt_main.run(CoServer.create(~mode, CoServer.make(~callback, ())));
 };

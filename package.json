@@ -24,7 +24,8 @@
       "require": [
         "lwt",
         "cohttp",
-        "cohttp-lwt-unix"
+        "cohttp-lwt-unix",
+        "console.lib"
       ]
     },
     "executable": {
