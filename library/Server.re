@@ -41,8 +41,8 @@ let listen = server => {
   Console.log(server.port);
   let callback = (_, req, _) => {
     let req = Request.from_raw(req);
-    let res = getHandleForRequest(req, server) @@ req;
-    Response.send(res);
+    let handle = getHandleForRequest(req, server);
+    Lwt_preemptive.detach(handle, req) >>= (res => Response.send(res));
   };
   ignore @@
   Lwt_main.run(CoServer.create(~mode, CoServer.make(~callback, ())));
