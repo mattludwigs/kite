@@ -28,6 +28,12 @@ let get = (path, handler, server) => {
   {...server, router: Router.putRoute(route, server.router)};
 };
 
+let post = (path, handler, server) => {
+  let route = Route.make(`POST, path, handler);
+
+  {...server, router: Router.putRoute(route, server.router)};
+};
+
 let tcpMode = port => `TCP(`Port(port));
 
 let getHandleForRequest = (req, server) => {
@@ -39,10 +45,12 @@ let getHandleForRequest = (req, server) => {
 let listen = server => {
   let mode = tcpMode(getPort(server));
   Console.log(server.port);
-  let callback = (_, req, _) => {
-    let req = Request.from_raw(req);
+  let callback = (_, req, body) => {
+    let req = Request.from_raw(req, body);
     let handle = getHandleForRequest(req, server);
-    Lwt_preemptive.detach(handle, req) >>= (res => Response.send(res));
+
+    handle(req) |> Response.send;
+    /* Lwt_preemptive.detach(handle, req) >>= (res => Response.send(res)); */
   };
   ignore @@
   Lwt_main.run(CoServer.create(~mode, CoServer.make(~callback, ())));
