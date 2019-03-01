@@ -1,5 +1,6 @@
-# server
+# Kite
 
+Example web server in Reason.
 
 [![CircleCI](https://circleci.com/gh/yourgithubhandle/server/tree/master.svg?style=svg)](https://circleci.com/gh/yourgithubhandle/server/tree/master)
 
