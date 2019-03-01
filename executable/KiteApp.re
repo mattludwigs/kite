@@ -1,3 +1,6 @@
+/**
+ * Example usage
+ */
 open Kite;
 
 let postHandler = req => {
