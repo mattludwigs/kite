@@ -2,6 +2,9 @@
 
 Example web server in Reason.
 
+Super early development, and right now used for learning ReasonML
+and trying things out.
+
 [![CircleCI](https://circleci.com/gh/yourgithubhandle/server/tree/master.svg?style=svg)](https://circleci.com/gh/yourgithubhandle/server/tree/master)
 
 
