@@ -1,6 +1,7 @@
 # Kite
 
-Example web server in Reason.
+Example web server in Reason that compiles to the Ocaml native
+backend.
 
 Super early development, and right now used for learning ReasonML
 and trying things out.
@@ -43,7 +44,7 @@ esy build
 After building the project, you can run the main binary that is produced.
 
 ```
-esy x ServerApp.exe 
+esy x KiteApp.exe 
 ```
 
 ## Running Tests:
