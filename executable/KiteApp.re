@@ -1,4 +1,5 @@
 open Lwt;
+open Kite;
 open Kite.Std;
 
 let postHandler = req => {
@@ -8,6 +9,6 @@ let postHandler = req => {
 
 let _ =
   Server.empty()
-  |> Server.get("/", _req => Handle.render_text("Hello world"))
+  |> Server.get("/", _req => Handle.render_text("Hellooooo world"))
   |> Server.post("/post-route", postHandler)
   |> Server.listen;

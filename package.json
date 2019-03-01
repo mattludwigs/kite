@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "kite",
   "version": "0.0.0",
   "description": "My Project",
   "esy": {
@@ -13,27 +13,28 @@
   "buildDirs": {
     "test": {
       "require": [
-        "server.lib"
+        "kite.lib"
       ],
       "main": "TestServer",
       "name": "TestServer.exe"
     },
     "library": {
-      "name": "server.lib",
-      "namespace": "Server",
+      "name": "kite.lib",
+      "namespace": "Kite",
       "require": [
         "lwt",
         "cohttp",
         "cohttp-lwt-unix",
-        "console.lib"
+        "console.lib",
+        "logs"
       ]
     },
     "executable": {
       "require": [
-        "server.lib"
+        "kite.lib"
       ],
-      "main": "ServerApp",
-      "name": "ServerApp.exe"
+      "main": "KiteApp",
+      "name": "KiteApp.exe"
     }
   },
   "scripts": {
@@ -45,6 +46,7 @@
     "@opam/cohttp": "2.0.0",
     "@opam/cohttp-lwt-unix": "2.0.0",
     "@opam/lwt": "4.1.0",
+    "@opam/logs": "0.6.2",
     "@esy-ocaml/reason": "*",
     "@reason-native/console": "^0.0.3",
     "refmterr": "*",
