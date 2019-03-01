@@ -1,6 +1,5 @@
 open Lwt;
 
-module Std = Std;
 module CoServer = Cohttp_lwt_unix.Server;
 
 type port = int;

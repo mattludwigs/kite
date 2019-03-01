@@ -26,3 +26,7 @@ let statusCode = (statusCode, req) => {
 let send = res => {
   Server.respond(~status=res.statusCode, ~body=res.body, ());
 };
+
+let renderText = text => {
+  empty() |> putBody(`String(text));
+};

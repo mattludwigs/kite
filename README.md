@@ -12,17 +12,17 @@ server@0.0.0
 ├─test/
 │   name:    TestServer.exe
 │   main:    TestServer
-│   require: server.lib
+│   require: kite.lib
 │
 ├─library/
-│   library name: server.lib
-│   namespace:    Server
+│   library name: kite.lib
+│   namespace:    Kite
 │   require:
 │
 └─executable/
-    name:    ServerApp.exe
-    main:    ServerApp
-    require: server.lib
+    name:    KiteApp.exe
+    main:    KiteApp
+    require: kite.lib
 ```
 
 ## Developing:

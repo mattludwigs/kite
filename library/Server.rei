@@ -1,5 +1,3 @@
-module Std = Std;
-
 type t;
 
 let empty: unit => t;
